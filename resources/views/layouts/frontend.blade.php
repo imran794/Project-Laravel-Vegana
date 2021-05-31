@@ -203,7 +203,12 @@
                                             <li><a class="dropdown-link" href="account.html">Account</a></li>
                                             <li><a class="dropdown-link" href="error.html">Error</a></li>
                                             <li><a class="dropdown-link" href="faq.html">Faqs</a></li>
-                                            <li><a class="dropdown-link" href="signin-up.html">Login or Register</a></li>
+                                            @auth
+                                            <li><a class="dropdown-link" href="{{ route('login') }}">Profile</a></li>
+                                            @else
+                                            <li><a class="dropdown-link" href="{{ route('login') }}">Login or Register</a></li>
+                                            @endauth
+                                      
                                         </ul>
                                     </li>
                                     <li class="navbar-item navbar-dropdown">
