@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\FrontentController;
 
@@ -16,9 +17,9 @@ use App\Http\Controllers\FrontentController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/',[FrontentController::class,'index']);
 
@@ -28,6 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'admin'], function(){
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+    Route::get('banner',[BannerController::class,'index'])->name('banner');
 });
 
 Route::group(['prefix'=> 'user','middleware' => ['user','auth'],'namespace'=> 'user'],function(){
