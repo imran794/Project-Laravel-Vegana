@@ -1,0 +1,97 @@
+
+
+
+//========================================
+//          1 - HELPERS FOLDER
+//========================================
+@import "../1-helpers/_mixin.scss";
+
+
+//========================================
+//          2 - COMPONENTS FOLDER
+//========================================
+@import "../2-components/_breadcrumb.scss";
+
+
+//========================================
+//          4 - LAYOUTS FOLDER
+//========================================
+@import "../4-layouts/_single-banner.scss";
+
+
+
+/*=====================================
+            FAQ PART STYLE
+======================================*/
+.faq-part {
+    padding: 100px 0px;
+}
+
+.faq-child {
+    margin-bottom: 30px;
+    background: var(--whitecolor);
+    border-radius: 5px;
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
+    border-left: 3px solid var(--brandcolor);
+    border-right: 3px solid var(--brandcolor);
+
+    &:hover {
+        .faq-que {
+            button {
+                color: var(--brandcolor);
+            }
+        }
+    }
+
+    &:last-child {
+        margin-bottom: 0px;
+    }
+}
+
+.faq-que {
+    cursor: pointer;
+    padding: 25px 30px;
+
+    button {
+        border: none;
+        outline: none;
+        background: none;
+        text-align: left;
+        color: var(--headingcolor);
+        font-size: 18px;
+        font-weight: 500;
+        @include cursor__transition;
+    }
+}
+
+.faq-ans {
+    p {
+        font-size: 16px;
+        line-height: 26px;
+        padding: 25px 30px;
+        border-top: 1px solid var(--bordercolor);
+    }
+}
+
+// FAQ RESPONSIVE STYLE
+@media (max-width: 767px) {
+    .faq-part {
+        padding: 20px 0px 0px;
+    }
+
+    .faq-parent {
+        margin-bottom: 30px;
+    }
+
+    .faq-headingcolor {
+        h2 {
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .faq-part {
+        padding: 30px 0px 0px;
+    }
+}
