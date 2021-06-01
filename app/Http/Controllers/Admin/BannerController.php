@@ -15,7 +15,9 @@ class BannerController extends Controller
     public function index()
     {
     	return view('backend.banner.index',[
-    		'banners'		=> Banner::latest()->get()
+    		'banners'		=> Banner::latest()->get(),
+    		'trashed'		=> Banner::onlyTrashed()->latest()->get()
+    		
     	]);
     }
 
@@ -43,7 +45,6 @@ class BannerController extends Controller
    		'banner_title'		=> $request->banner_title,
    		'banner_des'		=> $request->banner_des,
    		'banner_btn'		=> $request->banner_btn,
-   		'banner_title'		=> $request->banner_title,
    		'banner_image'		=> $save_url,
    		'banner_slug'		=> $slug,
    		'laft_contect'		=> $request->laft_contect,
@@ -58,9 +59,37 @@ class BannerController extends Controller
             'alert-type'=>'success'
         );
         return Redirect()->back()->with($notification);
+   }
 
 
+   public function bannersoft($id)
+   {
+   	Banner::findOrFail($id)->delete();
+   	$notification=array(
+            'message'=>'Banner Soft Delete Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('banner')->with($notification);
+   }
 
+   public function bannerrestore($id)
+   {
+   	Banner::withTrashed()->where('id','=',$id)->restore();
+   	 	$notification=array(
+            'message'=>'Banner Restore Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('banner')->with($notification);
+   }
+
+    public function bannerdelete($id)
+   {
+   	Banner::withTrashed()->where('id','=',$id)->forceDelete();
+   	 	$notification=array(
+            'message'=>'Banner Delete Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('banner')->with($notification);
    }
 
 

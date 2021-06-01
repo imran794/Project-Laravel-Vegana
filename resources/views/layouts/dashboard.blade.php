@@ -67,15 +67,15 @@
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
             <span class="menu-item-label">Visit Site</span>
           </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+        
+           </a><!-- sl-menu-link -->
            <a href="{{ route('banner') }}" class="sl-menu-link @yield('banner')">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
             <span class="menu-item-label">Banner</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-   
-      
+
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>

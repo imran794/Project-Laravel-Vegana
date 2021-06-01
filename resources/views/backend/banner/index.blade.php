@@ -62,8 +62,12 @@ active
 
                             <td>
                               <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ url('admin/edit') }}/{{ $banner->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
-                                <a href="{{ url('admin/brand/soft') }}/{{ $banner->id }}"  type="button" class="btn btn-info btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
+                                @if (Auth::user()->role_id == 4)
+                                  @else
+                                  <a href="{{ url('admin/edit') }}/{{ $banner->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
+                                @endif
+                                
+                                <a href="{{ url('admin/banner/soft') }}/{{ $banner->id }}"  type="button" class="btn btn-danger btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
                               </div>
                             </td>
                           </tr>
@@ -83,28 +87,48 @@ active
                    <table id="datatable2" class="table display responsive nowrap">
                      <thead>
                        <tr>
-                         <th class="wd-25p">Brand Image</th>
-                         <th class="wd-25p">Brand Name En</th>
-                         <th class="wd-25p">Brand Name Bn</th>
-                         <th class="wd-25p">Action</th>
+                           <th class="wd-25p">Banner Image</th>
+                            <th class="wd-25p">Banner Title</th>
+                            <th class="wd-25p">Banner Des</th>
+                            <th class="wd-25p">Banner Con</th>
+                            <th class="wd-25p">Status</th>
+                            <th class="wd-25p">Action</th>
                        </tr>
                      </thead>
                      <tbody>
-                       {{-- @foreach ($trashed as $trash)
-                       <tr>
-                         <td>
-                           <img width="100" src="{{ asset('uploaded/brand_image') }}/{{ $trash->brand_image }}" alt="">
-                         </td>
-                         <td>{{ $trash->brand_name_en }}</td>
-                         <td>{{ $trash->brand_name_bn }}</td>
-                         <td>
-                           <div class="btn-group" role="group" aria-label="Basic example">
-                             <a href="{{ url('admin/trashed') }}/{{ $trash->id }}" class="btn btn-info btn-sm" title="restore">restore</a>
-                             <a href="{{ url('admin/delete') }}/{{ $trash->id }}" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash"></i></a>
-                           </div>
-                         </td>
-                       </tr>
-                       @endforeach --}}
+                       @foreach ($trashed as $trash)
+                          <tr>
+                            <td>
+                              <img width="100" src="{{ asset($trash->banner_image) }}" alt="upload/banner_image">
+                            </td>
+                            <td>{{ Str::limit($trash->banner_title,15) }}</td>
+                            <td>{{ Str::limit($trash->banner_des,10) }}</td>
+                            <td>
+                              @if ($trash->laft_contect == 1)
+                                <span class="badge badge-pill badge-success">Left Content</span>
+                                @elseif($trash->right_contect == 1)
+                                <span class="badge badge-pill badge-info">Right Content</span>
+                                  @elseif($trash->middle_contect == 1)
+                                <span class="badge badge-pill badge-primary">Middel Content</span>
+
+                              @endif
+                            </td>
+                            <td>
+                              @if ($trash->status == 1)
+                                <span class="badge badge-pill badge-success">Active</span>
+                                @else
+                               <span class="badge badge-pill badge-danger">Deactive</span>
+                              @endif
+                            </td>
+
+                            <td>
+                              <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{{ url('admin/banner/restore') }}/{{ $trash->id }}" class="btn btn-success btn-sm" title="Restore"><i class="fa fa-arrow-up"></i></a>
+                                <a href="{{ url('admin/banner/delete') }}/{{ $trash->id }}"  type="button" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash"></i></a>
+                              </div>
+                            </td>
+                          </tr>
+                          @endforeach
                      </tbody>
               
                    </table>

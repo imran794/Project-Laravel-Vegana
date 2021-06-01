@@ -18,12 +18,14 @@
                             <div class="col-md-5 col-lg-6"></div>
                             <div class="col-md-7 col-lg-6">
                                 <div class="banner-content-1">
-                                    <h1>Stay healthy life with vegans food.</h1>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse suscipit illum nesciunt, pariatur explicabo nemo!</p>
+                                    @if ($laft_contect)
+                                    <h1>{{ $laft_contect->banner_title }}</h1>
+                                    <p>{{ $laft_contect->banner_des }}</p>
                                     <a class="btn btn-inline" href="product-list-1.html">
                                         <i class="fas fa-shopping-basket"></i>
-                                        <span>shop now</span>
+                                        <span>{{ $laft_contect->banner_btn }}</span>
                                     </a>
+                                      @endif
                                 </div>
                             </div>
                         </div>
@@ -38,12 +40,14 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="banner-content-2">
-                                    <h1>Healthy food comes form  healthy ingredients.</h1>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse suscipit illum nesciunt, pariatur explicabo nemo!</p>
+                                    @if ($right_contect)
+                                    <h1>{{ $right_contect->banner_title }}</h1>
+                                    <p>{{ $right_contect->banner_des }}</p>
                                     <a class="btn btn-inline" href="product-list-1.html">
                                         <i class="fas fa-shopping-basket"></i>
-                                        <span>shop now</span>
+                                        <span>{{ $right_contect->banner_btn }}</span>
                                     </a>
+                                 @endif
                                 </div>
                             </div>
                         </div>

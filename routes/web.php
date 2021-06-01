@@ -31,6 +31,9 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'ad
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     Route::get('banner',[BannerController::class,'index'])->name('banner');
     Route::post('banner/post',[BannerController::class,'bannerpost'])->name('banner.post');
+    Route::get('banner/soft/{id}',[BannerController::class,'bannersoft']);
+    Route::get('banner/restore/{id}',[BannerController::class,'bannerrestore']);
+    Route::get('banner/delete/{id}',[BannerController::class,'bannerdelete']);
 });
 
 Route::group(['prefix'=> 'user','middleware' => ['user','auth'],'namespace'=> 'user'],function(){
