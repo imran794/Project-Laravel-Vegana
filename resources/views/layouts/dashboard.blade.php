@@ -29,7 +29,7 @@
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
 
-    <title>Starlight Responsive Bootstrap 4 Admin Template</title>
+    <title>@yield('title')</title>
 
     <!-- vendor css -->
     <link href="{{ asset('dashboard_assets') }}/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -38,6 +38,7 @@
 
 
     <!-- Starlight CSS -->
+       <link rel="stylesheet" href="{{ asset('backend') }}/lib/toastr/toastr.css">
     <link rel="stylesheet" href="{{ asset('dashboard_assets') }}/css/starlight.css">
   </head>
 
@@ -314,8 +315,31 @@
     <script src="{{ asset('dashboard_assets') }}/lib/popper.js/popper.js"></script>
     <script src="{{ asset('dashboard_assets') }}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{ asset('dashboard_assets') }}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
-
     <script src="{{ asset('dashboard_assets') }}/js/starlight.js"></script>
+    <script type="text/javascript" src="{{ asset('backend') }}/lib/toastr/toastr.min.js"></script>
+
+    <script>
+      @if(Session::has('message'))
+        var type ="{{Session::get('alert-type','info')}}"
+        switch(type){
+            case 'info':
+                toastr.info(" {{Session::get('message')}} ");
+                break;
+
+            case 'success':
+                toastr.success(" {{Session::get('message')}} ");
+                break;
+
+            case 'warning':
+                toastr.warning(" {{Session::get('message')}} ");
+                break;
+
+            case 'error':
+                toastr.error(" {{Session::get('message')}} ");
+                break;
+        }
+    @endif
+    </script>
 
   </body>
 </html>

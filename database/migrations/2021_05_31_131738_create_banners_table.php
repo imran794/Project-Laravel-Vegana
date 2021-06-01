@@ -23,7 +23,8 @@ class CreateBannersTable extends Migration
             $table->integer('right_contect')->nullable();
             $table->integer('middle_contect')->nullable();
             $table->string('banner_image');
-            $table->integer('status')->defualt(1);
+            $table->text('banner_slug');
+            $table->integer('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

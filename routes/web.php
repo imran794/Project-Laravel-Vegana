@@ -30,10 +30,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'admin'], function(){
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     Route::get('banner',[BannerController::class,'index'])->name('banner');
+    Route::post('banner/post',[BannerController::class,'bannerpost'])->name('banner.post');
 });
 
 Route::group(['prefix'=> 'user','middleware' => ['user','auth'],'namespace'=> 'user'],function(){
 	Route::get('dashboard',[UserController::class, 'index'])->name('user.dashboard');
 
 });
+
 

@@ -30,25 +30,44 @@ active
                             <th class="wd-25p">Banner Title</th>
                             <th class="wd-25p">Banner Des</th>
                             <th class="wd-25p">Banner Con</th>
+                            <th class="wd-25p">Status</th>
                             <th class="wd-25p">Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {{-- @foreach ($brands as $brand)
+                          @foreach ($banners as $banner)
                           <tr>
                             <td>
-                              <img width="100" src="{{ asset('uploaded/brand_image') }}/{{ $brand->brand_image }}" alt="">
+                              <img width="100" src="{{ asset($banner->banner_image) }}" alt="upload/banner_image">
                             </td>
-                            <td>{{ $brand->brand_name_en }}</td>
-                            <td>{{ $brand->brand_name_bn }}</td>
+                            <td>{{ Str::limit($banner->banner_title,15) }}</td>
+                            <td>{{ Str::limit($banner->banner_des,10) }}</td>
+                            <td>
+                              @if ($banner->laft_contect == 1)
+                                <span class="badge badge-pill badge-success">Left Content</span>
+                                @elseif($banner->right_contect == 1)
+                                <span class="badge badge-pill badge-info">Right Content</span>
+                                  @elseif($banner->middle_contect == 1)
+                                <span class="badge badge-pill badge-primary">Middel Content</span>
+
+                              @endif
+                            </td>
+                            <td>
+                              @if ($banner->status == 1)
+                                <span class="badge badge-pill badge-success">Active</span>
+                                @else
+                               <span class="badge badge-pill badge-danger">Deactive</span>
+                              @endif
+                            </td>
+
                             <td>
                               <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ url('admin/edit') }}/{{ $brand->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
-                                <a href="{{ url('admin/brand/soft') }}/{{ $brand->id }}"  type="button" class="btn btn-info btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
+                                <a href="{{ url('admin/edit') }}/{{ $banner->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a href="{{ url('admin/brand/soft') }}/{{ $banner->id }}"  type="button" class="btn btn-info btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
                               </div>
                             </td>
                           </tr>
-                          @endforeach --}}
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -96,40 +115,59 @@ active
         </div>
         <div class="col-md-4">
          <div class="card">
-             <div class="card-header">Add Brand</div>
+             <div class="card-header">Add Banner</div>
              <div class="card-body">
-                <form method="POST" action="{{ route('Banner.post') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('banner.post') }}" enctype="multipart/form-data">
                   @csrf
                   <div class="form-group">
                       <label for="exampleInputEmail1">Bnnner Title</label>
-                      <input type="text" class="form-control" name="Banner_title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Bnnner Title">
-                      @error('Banner_title')
+                      <input type="text" class="form-control" name="banner_title" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Bnnner Title">
+                      @error('banner_title')
                           <span class="text-danger">{{ $message }}</span>
                       @enderror
 
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Bnnner Title</label>
-                      <input type="text" class="form-control" name="Banner_des" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Bnnner Description">
-                      @error('Banner_des')
+                     
+                      <textarea class="form-control" name="banner_des" placeholder="Bnnner Description"></textarea>
+                      @error('banner_des')
                           <span class="text-danger">{{ $message }}</span>
                       @enderror
 
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Brnad Btn</label>
+                      <label for="exampleInputPassword1">Banner Btn</label>
                       <input type="text" class="form-control" name="banner_btn" id="exampleInputPassword1" placeholder="Banner Btn">
                       @error('banner_btn')
                       <span class="text-danger">{{ $message }}</span>
                      @enderror
                     </div>
                        <div class="form-group">
-                      <label for="exampleInputPassword1">Brnad Image</label>
-                      <input type="file" name="brand_image" class="form-control" id="exampleInputPassword1" placeholder="Brand Image">
-                      @error('brand_image')
+                      <label for="exampleInputPassword1">Banner Image</label>
+                      <input type="file" name="banner_image" class="form-control" id="exampleInputPassword1" placeholder="Brand Image">
+                      @error('banner_image')
                       <span class="text-danger">{{ $message }}</span>
                      @enderror
-                    </div>
+                    </div> 
+                      <div class="form-group">
+                      <label for="exampleInputPassword1">Banner Content</label>
+                      <label class="ckbox">
+                        <input type="checkbox" value="1" name="laft_contect">
+                        <span>Laft Contect</span>
+                      </label>
+                       <label class="ckbox">
+                        <input type="checkbox" value="1" name="right_contect">
+                        <span>Right Contect</span>
+                      </label>
+                       <label class="ckbox">
+                        <input type="checkbox" value="1" name="middle_contect"> 
+                        <span>Middle Contect</span>
+                      </label>
+                    </div> 
+
+                    
+                 
                     <button type="submit" style="cursor: pointer" class="btn btn-primary">Add Banner</button>
                   </form>
              </div>
