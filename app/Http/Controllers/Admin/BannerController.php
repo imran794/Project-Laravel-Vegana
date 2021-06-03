@@ -92,5 +92,95 @@ class BannerController extends Controller
         return Redirect()->route('banner')->with($notification);
    }
 
+   public function banneredit($id)
+   {
+
+        return view('backend.banner.edit',[
+          'edit_data'   => Banner::findOrFail($id)
+        ]);
+
+   }
+
+   public function Bannereditpost(Request $request)
+   {
+     
+          $id        = $request->id;
+          $old_image = $request->old_image;
+
+          $request->validate([
+            'banner_title'    => 'required',
+            'banner_des'      => 'required',
+            'banner_btn'      => 'required',
+          ]);
+
+
+          if ($request->file('banner_image')) {
+              unlink($old_image);
+              $banner_image = $request->file('banner_image');
+              $new_name     = hexdec(uniqid()).'.'.$banner_image->extension();
+              Image::make($banner_image)->resize(2000,700)->save('upload/banner_image/'.$new_name);
+              $save_url_up = 'upload/banner_image/'.$new_name;
+
+             Banner::findOrFail($id)->update([
+            'banner_title'    => $request->banner_title,
+            'banner_des'    => $request->banner_des,
+            'banner_btn'    => $request->banner_btn,
+            'banner_image'    => $save_url_up,
+            'laft_contect'    => $request->laft_contect,
+            'right_contect'   => $request->right_contect,
+            'middle_contect'    => $request->middle_contect,
+            'updated_at'    => Carbon::now()  
+
+          ]);
+          }
+
+          else{
+             $banner_image = $request->file('banner_image');
+              $new_name     = hexdec(uniqid()).'.'.$banner_image->extension();
+              Image::make($banner_image)->resize(2000,700)->save('upload/banner_image/'.$new_name);
+              $save_url_up = 'upload/banner_image/'.$new_name;
+
+             Banner::findOrFail($id)->update([
+            'banner_title'    => $request->banner_title,
+            'banner_des'    => $request->banner_des,
+            'banner_btn'    => $request->banner_btn,
+            'banner_image'    => $save_url_up,
+            'laft_contect'    => $request->laft_contect,
+            'right_contect'   => $request->right_contect,
+            'middle_contect'    => $request->middle_contect,
+            'updated_at'    => Carbon::now()  
+
+          ]);
+
+          }
+
+            $notification=array(
+            'message'=>'Banner Update Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('banner')->with($notification);
+
+   }
+
+     public function bannerinactive($id)
+       {
+        Banner::findOrFail($id)->update(['status' => 0]);
+        $notification=array(
+                'message'=>'Banner Deactive Successfully',
+                'alert-type'=>'success'
+            );
+            return Redirect()->route('banner')->with($notification);
+       }
+
+        public function banneractive($id)
+       {
+        Banner::findOrFail($id)->update(['status' => 1]);
+        $notification=array(
+                'message'=>'Banner Active Successfully',
+                'alert-type'=>'success'
+            );
+            return Redirect()->route('banner')->with($notification);
+       }
+
 
 }

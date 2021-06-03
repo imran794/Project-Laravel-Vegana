@@ -62,11 +62,18 @@ active
 
                             <td>
                               <div class="btn-group" role="group" aria-label="Basic example">
-                                @if (Auth::user()->role_id == 4)
+                             @if ( Auth::user()->role_id == 3)
                                   @else
-                                  <a href="{{ url('admin/edit') }}/{{ $banner->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
+                                   @if ( Auth::user()->role_id == 4)
+                                  @else
+                                  <a href="{{ url('admin/banner/edit') }}/{{ $banner->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                               @endif
                                 @endif
-                                
+                                @if ($banner->status == 1)
+                                  <a href="{{ url('admin/banner/inactive') }}/{{ $banner->id }}" class="btn btn-info btn-sm" title="Deactive"><i class="fa fa-arrow-down"></i></a>
+                                  @else
+                                   <a href="{{ url('admin/banner/active') }}/{{ $banner->id }}" class="btn btn-primary btn-sm" title="Active"><i class="fa fa-arrow-up"></i></a>
+                                @endif
                                 <a href="{{ url('admin/banner/soft') }}/{{ $banner->id }}"  type="button" class="btn btn-danger btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
                               </div>
                             </td>

@@ -13,7 +13,7 @@
                             <h2>User Profile</h2>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                                <li class="breadcrumb-item active" aria-current="page">Update Password</li>
                             </ol>
                         </div>
                     </div>
@@ -45,31 +45,33 @@
                         <div class="card">
                <h3 class="text-center"> <span class="text-dange">Hi..!</span> <strong class="text-warning">{{ Auth::user()->name }}</strong> Update Your profile</h3>
              <div class="card-body">
-                <form method="POST" action="{{ route('update.Data.profile') }}">
+                <form method="POST" action="{{ route('update.password.post') }}">
                   @csrf
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Name</label>
-                      <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ auth::user()->name }}">
-                      @error('name')
+                      <label for="exampleInputEmail1">Password</label>
+                      <input type="password" class="form-control" name="old_password" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Old Password">
+                      @error('password')
+                          <span class="text-danger">{{ $message }}</span>
+                      @enderror
+
+                    </div> 
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">New Password</label>
+                      <input type="password" class="form-control" name="password" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter New Password">
+                      @error('password')
+                          <span class="text-danger">{{ $message }}</span>
+                      @enderror
+
+                    </div> <div class="form-group">
+                      <label for="exampleInputEmail1">Confirm Password</label>
+                      <input type="password" class="form-control" name="password_confirmation" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Confirm Password">
+                      @error('password_confirmation')
                           <span class="text-danger">{{ $message }}</span>
                       @enderror
 
                     </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Email</label>
-                      <input type="text" class="form-control" name="email" id="exampleInputPassword1" value="{{ auth::user()->email }}">
-                      @error('email')
-                      <span class="text-danger">{{ $message }}</span>
-                     @enderror
-                    </div>
-                       <div class="form-group">
-                      <label for="exampleInputPassword1">Phone Number</label>
-                      <input type="text" name="number" class="form-control" id="exampleInputPassword1" value="{{ auth::user()->number }}">
-                      @error('number')
-                      <span class="text-danger">{{ $message }}</span>
-                     @enderror
-                    </div>
-                    <button type="submit" style="cursor: pointer" class="btn btn-primary">Update Profile</button>
+               
+                    <button type="submit" style="cursor: pointer" class="btn btn-primary">Update Password</button>
                   </form>
              </div>
          </div>

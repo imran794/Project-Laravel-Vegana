@@ -110,7 +110,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
-                <li><a href=""><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
+                <li><a href="{{ route('edit.admin.profile') }}"><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
                 <li><a href="{{ route('logout') }}" 
                   onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
@@ -297,9 +297,7 @@
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
       <nav class="breadcrumb sl-breadcrumb">
-        <a class="breadcrumb-item" href="index.html">Starlight</a>
-        <a class="breadcrumb-item" href="index.html">Pages</a>
-        <span class="breadcrumb-item active">Blank Page</span>
+        @yield('breadcrumb')
       </nav>
 
       <div class="sl-pagebody">

@@ -30,7 +30,7 @@
                     CSS LINK PART START
         =======================================-->
         <!-- FOR FAVICON -->
-        <link rel="icon" href="images/favicon.png">
+        <link rel="icon" href="{{ asset('frontend') }}/images/favicon.png">
 
         <!-- FOR FLATICON -->
         <link rel="stylesheet" href="{{ asset('frontend') }}/fonts/flaticon/flaticon.css">
@@ -49,6 +49,10 @@
 
         <!-- FOR HOME-1 PAGE -->
         <link rel="stylesheet" href="{{ asset('frontend') }}/css/custom/index.css">
+          <!-- FOR FAVICON -->
+          <link rel="stylesheet" href="{{ asset('frontend') }}/css/custom/faq.css">
+            <link rel="stylesheet" href="{{ asset('backend') }}/lib/toastr/toastr.css">
+       
         <!--=====================================
                     CSS LINK PART END
         =======================================-->
@@ -277,6 +281,34 @@
 
      @yield('content')
 
+       <!--=====================================
+                    NEWSLETTER PART START
+        =======================================-->
+        <section class="news-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-lg-6">
+                        <div class="news-content">
+                            <h2>Subscribe for Latest Offers</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-6">
+                        <form class="search-form news-form">
+                            <input type="text" placeholder="Enter Email Address">
+                            <button class="btn btn-inline">
+                                <i class="fas fa-envelope"></i>
+                                <span>Subscribe</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================
+                    NEWSLETTER PART END
+        =======================================-->
+  
+
 
         <!--=====================================
                      FOOTER PART START
@@ -366,9 +398,34 @@
         <!-- FOR SLICK SLIDER -->
         <script src="{{ asset('frontend') }}/js/vendor/slick.min.js"></script>
         <script src="{{ asset('frontend') }}/js/custom/slick.js"></script>
-
+        <script src="{{ asset('frontend') }}/js/custom/price-range.js"></script>
         <!-- FOR COMMON SCRIPT -->
-        <script src="{{ asset('frontend') }}/js/custom/main.js"></script> 
+        <script src="{{ asset('frontend') }}/js/custom/main.js"></script>
+
+         <script type="text/javascript" src="{{ asset('backend') }}/lib/toastr/toastr.min.js"></script>
+
+    <script>
+      @if(Session::has('message'))
+        var type ="{{Session::get('alert-type','info')}}"
+        switch(type){
+            case 'info':
+                toastr.info(" {{Session::get('message')}} ");
+                break;
+
+            case 'success':
+                toastr.success(" {{Session::get('message')}} ");
+                break;
+
+            case 'warning':
+                toastr.warning(" {{Session::get('message')}} ");
+                break;
+
+            case 'error':
+                toastr.error(" {{Session::get('message')}} ");
+                break;
+        }
+    @endif
+    </script> 
         <!--=====================================
                     JS LINK PART END
         =======================================-->
