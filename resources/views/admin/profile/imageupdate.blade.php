@@ -18,8 +18,8 @@ active
         <img class="card-img-top" style="border-radius: 50%; margin-top: 10px;" width="100%" height="100%" src="{{ asset(Auth::user()->image) }}" alt="">
         <ul class="list-group list-group-flush">
           <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-block btn-primary">Home</a>
-          <a href="{{ route('img.update') }}" class="btn btn-sm btn-block btn-primary">Update Image</a>
-          <a href="{{ route('change.passwprd') }}" class="btn btn-sm btn-block btn-primary">Change Password</a>
+          <a href="{{ route('image.update.admin') }}" class="btn btn-sm btn-block btn-primary">Update Image</a>
+          <a href="{{ route('change.passwprd.admin') }}" class="btn btn-sm btn-block btn-primary">Change Password</a>
           <a href="{{ route('logout') }}" onclick="event.preventDefault();
           document.getElementById('logout-form').submit();" class="btn btn-sm btn-block btn-danger">Sign Out</a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -32,26 +32,14 @@ active
       <div class="card">
         <h3 class="text-center"> <span class="text-dange">Hi..!</span> <strong class="text-warning">{{ Auth::user()->name }}</strong> Update Your profile</h3>
         <div class="card-body">
-          <form method="POST" action="{{ route('edit.post.admin') }}">
-            @csrf
+          <form method="POST" action="{{ route('img.update.post') }}" enctype="multipart/form-data">
+             @csrf
+            <input type="hidden" name="old_image" value="{{ auth::user()->image }}">
+            
             <div class="form-group">
-              <label for="exampleInputEmail1">Name</label>
-              <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ auth::user()->name }}">
-              @error('name')
-              <span class="text-danger">{{ $message }}</span>
-              @enderror
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Email</label>
-              <input type="text" class="form-control" name="email" id="exampleInputPassword1" value="{{ auth::user()->email }}">
-              @error('email')
-              <span class="text-danger">{{ $message }}</span>
-              @enderror
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Phone Number</label>
-              <input type="text" name="number" class="form-control" id="exampleInputPassword1" value="{{ auth::user()->number }}">
-              @error('number')
+              <label for="exampleInputEmail1">Image</label>
+              <input type="file" class="form-control" name="image" id="exampleInputEmail1" aria-describedby="emailHelp">
+              @error('image')
               <span class="text-danger">{{ $message }}</span>
               @enderror
             </div>

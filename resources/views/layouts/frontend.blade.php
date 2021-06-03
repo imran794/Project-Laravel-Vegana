@@ -24,7 +24,7 @@
         =======================================-->
 
         <!-- FOR WEBPAGE TITLE -->
-        <title>Vegana - Home</title>
+        <title>@yield('title')</title>
 
         <!--=====================================
                     CSS LINK PART START

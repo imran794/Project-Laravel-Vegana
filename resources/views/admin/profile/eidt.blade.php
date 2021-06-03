@@ -16,12 +16,11 @@
     <div class="row">
         <div class="col-md-8">
          <div class="card">
-             <div class="card-header">Edit Banner</div>
+             <div class="card-header">Edit Profile</div>
              <div class="card-body">
-                   <form method="POST" action="{{ route('Banner.edit.post') }}" enctype="multipart/form-data">
+                   <form method="POST" action="{{ route('admin.edit.post') }}" enctype="multipart/form-data">
                   @csrf
-                  <input type="hidden" name="id" value='{{ $edit_data->id }}'>
-                  <input type="hidden" name="old_image" value="{{ $edit_data->banner_image }}">
+                  <input type="hidden" name="old_image" value="{{ Auth::user()->image }}">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Name</label>
                       <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $edit_data->name }}">
@@ -31,8 +30,8 @@
                     </div>
 
                      <div class="form-group">
-                      <label for="exampleInputEmail1">Email</label>
-                      <textarea class="form-control" name="email">{{ $edit_data->email }}</textarea>
+                       <label for="exampleInputEmail1">Phone Number</label>
+                      <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $edit_data->email }}">
                       @error('email')
                           <span class="text-danger">{{ $message }}</span>
                       @enderror
@@ -46,7 +45,7 @@
                     </div>
                        <div class="form-group">
                       <label for="exampleInputPassword1">Image</label>
-                      <input type="file" name="banner_image" class="form-control" id="exampleInputPassword1">
+                      <input type="file" name="image" class="form-control" id="exampleInputPassword1">
                       <div class="py-2">
                         <img width="200" src="{{ asset($edit_data->image) }}">
                       </div>
@@ -56,7 +55,7 @@
                     </div>
                  
 
-                    <button type="submit" style="cursor: pointer" class="btn btn-primary">Update Brand</button>
+                    <button type="submit" style="cursor: pointer" class="btn btn-primary">Update Profile</button>
                   </form>
              </div>
          </div>

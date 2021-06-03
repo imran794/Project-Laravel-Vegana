@@ -42,8 +42,13 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'ad
     // edit profile
 
     Route::get('edit/admin/profile',[AdminController::class, 'adminprofile'])->name('edit.admin.profile');
-    Route::get('profile/delete/{id}',[AdminController::class, 'profiledelete']);
+    // Route::get('profile/delete/{id}',[AdminController::class, 'profiledelete']);
     Route::get('profile/edit/{id}',[AdminController::class, 'profileedit']);
+    Route::post('edit/post/admin',[AdminController::class, 'admineditpost'])->name('edit.post.admin');
+    Route::get('image/update/admin',[AdminController::class, 'admineditpost'])->name('image.update.admin');
+    Route::get('img/update',[AdminController::class, 'imgupdate'])->name('img.update');
+    Route::post('img/update/post',[AdminController::class, 'imgupdatepost'])->name('img.update.post');
+    Route::get('change/passwprd/admin',[AdminController::class, 'changepasswprdadmin'])->name('change.passwprd.admin');
 });
 
 Route::group(['prefix'=> 'user','middleware' => ['user','auth'],'namespace'=> 'user'],function(){
